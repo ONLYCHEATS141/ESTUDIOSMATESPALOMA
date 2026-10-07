@@ -91,6 +91,77 @@
                 </div>
             </div>
 
+            <!-- Regla de signos: multiplicación y división -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Módulo 1.5</span>
+                <h3 class="text-2xl font-bold text-slate-900 mt-2 mb-4">✖️➗ Multiplicación y División (Regla de Signos)</h3>
+                <p class="text-slate-600 leading-relaxed mb-5">
+                    Al multiplicar o dividir hay que mirar los signos de los dos números que operan. La regla es <strong>idéntica para la multiplicación y para la división</strong>: primero se operan los valores absolutos y después se decide el signo del resultado.
+                </p>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="bg-indigo-600 text-white text-xs uppercase tracking-wide">
+                                <th class="px-4 py-3 font-semibold">Primer signo</th>
+                                <th class="px-4 py-3 font-semibold">Segundo signo</th>
+                                <th class="px-4 py-3 font-semibold">Resultado</th>
+                                <th class="px-4 py-3 font-semibold">Multiplicación</th>
+                                <th class="px-4 py-3 font-semibold">División</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="bg-emerald-50">
+                                <td class="px-4 py-3 font-mono font-bold text-emerald-700">(+)</td>
+                                <td class="px-4 py-3 font-mono font-bold text-emerald-700">(+)</td>
+                                <td class="px-4 py-3 font-bold text-emerald-700">(+)</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(+3) × (+5) = +15</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(+12) ÷ (+4) = +3</td>
+                            </tr>
+                            <tr class="bg-rose-50">
+                                <td class="px-4 py-3 font-mono font-bold text-rose-700">(+)</td>
+                                <td class="px-4 py-3 font-mono font-bold text-rose-700">(−)</td>
+                                <td class="px-4 py-3 font-bold text-rose-700">(−)</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(+3) × (−5) = −15</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(+12) ÷ (−4) = −3</td>
+                            </tr>
+                            <tr class="bg-rose-50">
+                                <td class="px-4 py-3 font-mono font-bold text-rose-700">(−)</td>
+                                <td class="px-4 py-3 font-mono font-bold text-rose-700">(+)</td>
+                                <td class="px-4 py-3 font-bold text-rose-700">(−)</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(−3) × (+5) = −15</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(−12) ÷ (+4) = −3</td>
+                            </tr>
+                            <tr class="bg-emerald-50">
+                                <td class="px-4 py-3 font-mono font-bold text-emerald-700">(−)</td>
+                                <td class="px-4 py-3 font-mono font-bold text-emerald-700">(−)</td>
+                                <td class="px-4 py-3 font-bold text-emerald-700">(+)</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(−3) × (−5) = +15</td>
+                                <td class="px-4 py-3 font-mono text-slate-700">(−12) ÷ (−4) = +3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+                    <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl text-center">
+                        <div class="text-2xl mb-1">✅</div>
+                        <p class="text-sm font-bold text-emerald-800">Signos iguales</p>
+                        <p class="text-xs text-emerald-700 mt-1">(+) con (+) o (−) con (−) → resultado <strong>positivo (+)</strong></p>
+                    </div>
+                    <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl text-center">
+                        <div class="text-2xl mb-1">❌</div>
+                        <p class="text-sm font-bold text-rose-800">Signos distintos</p>
+                        <p class="text-xs text-rose-700 mt-1">(+) con (−) o (−) con (+) → resultado <strong>negativo (−)</strong></p>
+                    </div>
+                    <div class="bg-slate-100 border border-slate-200 p-4 rounded-xl text-center">
+                        <div class="text-2xl mb-1">0️⃣</div>
+                        <p class="text-sm font-bold text-slate-800">Caso del cero</p>
+                        <p class="text-xs text-slate-600 mt-1">0 multiplicado o dividido entre cualquier distinto de cero da <strong>0</strong></p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Potencias -->
             <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
                 <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Módulo 2</span>
