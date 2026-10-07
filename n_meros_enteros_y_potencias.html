@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Enteros, Potencias y Control de Temperatura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#06b6d4',
+                        accent: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <header class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-3 md:mb-0">
+                <span class="text-3xl">🌡️</span>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Matemáticas desde Cero</h1>
+                    <p class="text-xs text-indigo-100">Enteros, Valor Absoluto, Opuestos, Potencias y Temperaturas</p>
+                </div>
+            </div>
+            <nav class="flex flex-wrap gap-2 justify-center">
+                <button onclick="switchTab('teoria')" id="btn-teoria" class="px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all bg-white text-indigo-700 shadow-md">📖 Teoría Enteros</button>
+                <button onclick="switchTab('teoria-temp')" id="btn-teoria-temp" class="px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all bg-indigo-700/60 text-white hover:bg-indigo-700">📖 Teoría Temperaturas</button>
+                <button onclick="switchTab('practica')" id="btn-practica" class="px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all bg-indigo-700/60 text-white hover:bg-indigo-700">✏️ Práctica Enteros</button>
+                <button onclick="switchTab('practica-temp')" id="btn-practica-temp" class="px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all bg-indigo-700/60 text-white hover:bg-indigo-700">🌡️ Práctica Temperaturas</button>
+                <button onclick="switchTab('juego')" id="btn-juego" class="px-3 py-2 rounded-lg font-medium text-xs md:text-sm transition-all bg-indigo-700/60 text-white hover:bg-indigo-700">🏆 Test Final</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-8 space-y-8">
+
+        <!-- TAB 1: TEORÍA COMPLETA (ENTEROS, VALOR ABSOLUTO, OPUESTO, POTENCIAS) -->
+        <section id="tab-teoria" class="tab-content active space-y-8">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Módulo 1</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-4">¿Qué son los Números Enteros ($\mathbb{Z}$)?</h2>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Los números enteros están formados por los <strong>números naturales</strong> (positivos), el <strong>cero</strong> y los <strong>números negativos</strong>. Sirven para representar situaciones cotidianas como deudas, plantas de sótano o termómetros bajo cero.
+                </p>
+                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono text-lg text-indigo-900 overflow-x-auto py-3">
+                    ... -5, -4, -3, -2, -1, <strong>0</strong>, +1, +2, +3, +4, +5 ...
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Valor Absoluto -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <span class="bg-cyan-100 text-cyan-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Concepto Clave</span>
+                    <h3 class="text-2xl font-bold text-slate-900 mt-2 mb-3">Valor Absoluto ($|a|$)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Es la distancia numérica de un número al cero. Al ser una distancia, <strong>siempre es un valor positivo</strong>. Se encierra entre barras verticales.
+                    </p>
+                    <div class="bg-cyan-50 p-4 rounded-xl space-y-2 font-mono text-sm">
+                        <div><strong>|+15| = 15</strong> <span class="text-slate-500 font-sans text-xs">(Distancia de +15 al 0 es 15)</span></div>
+                        <div><strong>|-15| = 15</strong> <span class="text-slate-500 font-sans text-xs">(Distancia de -15 al 0 también es 15)</span></div>
+                        <div><strong>|0| = 0</strong></div>
+                    </div>
+                </div>
+
+                <!-- Opuesto -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Concepto Clave</span>
+                    <h3 class="text-2xl font-bold text-slate-900 mt-2 mb-3">Número Opuesto ($op(a)$)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Consiste en cambiarle el signo al número. Si es positivo se vuelve negativo, y si es negativo se vuelve positivo.
+                    </p>
+                    <div class="bg-purple-50 p-4 rounded-xl space-y-2 font-mono text-sm">
+                        <div><strong>op(+5) = -5</strong></div>
+                        <div><strong>op(-8) = +8</strong> <span class="text-slate-500 font-sans text-xs">(Cambiamos el signo menos por más)</span></div>
+                        <div><strong>op(0) = 0</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Potencias -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Módulo 2</span>
+                <h3 class="text-2xl font-bold text-slate-900 mt-2 mb-4">¿Qué es una Potencia?</h3>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Una potencia es una forma abreviada de escribir una multiplicación de factores iguales. Tiene una <strong>base</strong> (el número que se multiplica) y un <strong>exponente</strong> (las veces que se repite).
+                </p>
+                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono text-xl text-indigo-900">
+                    2<sup>3</sup> = 2 × 2 × 2 = <strong>8</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: TEORÍA APARTE DE CONTROLES DE TEMPERATURA -->
+        <section id="tab-teoria-temp" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Módulo Especial</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-4">🌡️ Cómo resolver Problemas y Controles de Temperatura</h2>
+                <p class="text-slate-600 leading-relaxed mb-4">
+                    Los controles de temperatura son aplicaciones prácticas fantásticas de los números enteros. En termodinámica o en la meteorología diaria, cruzamos constantemente el número <strong>0ºC</strong> (punto de congelación del agua). Vamos a aprender a resolver los dos tipos principales de problemas desde cero.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Tipo 1: Calcular temperatura final -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-1 rounded-full">Caso 1</span>
+                    <h3 class="text-xl font-bold text-slate-900">Calcular la Temperatura Final</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Te dan una temperatura inicial y te indican si <strong>sube</strong> (suma, $+ unlike$) o <strong>baja</strong> (resta, $- unlike$).
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <p class="text-xs font-bold text-slate-700 uppercase">💡 Ejemplo paso a paso:</p>
+                        <p class="text-sm text-slate-600 italic">"Estás a <strong>-4ºC</strong> por la noche y durante la mañana la temperatura <strong>sube 7ºC</strong>. ¿Qué marca el termómetro?"</p>
+                        <div class="text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <div>1. Temperatura inicial: <span class="text-indigo-600">-4</span></div>
+                            <div>2. Operación (si sube es +): <span class="text-indigo-600">+ 7</span></div>
+                            <div>3. Cálculo: (-4) + (+7) = <strong class="text-emerald-700">+3ºC</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tipo 2: Calcular variación o diferencia -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+                    <span class="bg-cyan-100 text-cyan-800 text-xs font-semibold px-2.5 py-1 rounded-full">Caso 2</span>
+                    <h3 class="text-xl font-bold text-slate-900">Calcular la Variación (Diferencia)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Te dan la temperatura inicial y la temperatura final, y te preguntan <strong>cuántos grados subió o bajó</strong> (cuánta distancia hay entre ambas).
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <p class="text-xs font-bold text-slate-700 uppercase">💡 Ejemplo paso a paso:</p>
+                        <p class="text-sm text-slate-600 italic">"A las 6:00 a.m. el termómetro marcaba <strong>-3ºC</strong> y a las 14:00 marcaba <strong>+5ºC</strong>. ¿Cuántos grados subió?"</p>
+                        <div class="text-xs font-mono bg-white p-3 rounded border border-slate-200 space-y-1">
+                            <div>1. Regla de variación: <span class="text-cyan-750">Final - Inicial</span></div>
+                            <div>2. Sustituimos: <span class="text-cyan-700">(+5) - (-3)</span></div>
+                            <div>3. Al restar un negativo, se convierte en suma: <span class="text-cyan-700">5 + 3</span></div>
+                            <div>4. Resultado: <strong class="text-emerald-700">Subió 8ºC</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regla general recta numérica -->
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-6 md:p-8 shadow-md">
+                <h3 class="text-xl font-bold mb-3">📏 Truco Visual de la Recta Numérica para Temperaturas</h3>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                    Imagínate el termómetro como una escalera vertical:
+                </p>
+                <ul class="space-y-2 text-sm text-slate-200 list-disc list-inside">
+                    <li>Para pasar de una temperatura bajo cero a una sobre cero, siempre tienes que sumar primero los grados necesarios para llegar al <strong>0ºC</strong>, y luego sumar los grados positivos restantes.</li>
+                    <li><em>Ejemplo: De -5ºC a +4ºC hay 5 grados hasta el cero + 4 grados por encima = ¡9 grados de salto total!</em></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TAB 3: PRÁCTICA GENERAL ENTEROS -->
+        <section id="tab-practica" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Bloque de Práctica</span>
+                        <h2 class="text-2xl font-bold text-slate-900 mt-2">Ejercicios de Números Enteros y Potencias</h2>
+                        <p class="text-sm text-slate-500">Resuelve cada ejercicio. Si fallas, la plataforma te revelará inmediatamente la respuesta correcta explicada.</p>
+                    </div>
+                    <div class="mt-4 sm:mt-0 bg-indigo-50 border border-indigo-200 px-4 py-2 rounded-xl text-indigo-900 font-bold text-sm">
+                        Aciertos: <span id="practice-score">0</span> / <span id="practice-total">6</span>
+                    </div>
+                </div>
+
+                <div id="practice-list" class="space-y-6">
+                    <!-- Dinámico -->
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button onclick="initPracticeExercises()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition shadow">🔄 Generar Nuevos Ejercicios</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: PRÁCTICA APARTE DE TEMPERATURAS -->
+        <section id="tab-practica-temp" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Apartado Especial</span>
+                        <h2 class="text-2xl font-bold text-slate-900 mt-2">🌡️ Ejercicios de Controles de Temperatura</h2>
+                        <p class="text-sm text-slate-500">Pon a prueba tu destreza con problemas reales de termómetros, variaciones y saltos térmicos.</p>
+                    </div>
+                    <div class="mt-4 sm:mt-0 bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-900 font-bold text-sm">
+                        Aciertos Temp: <span id="temp-score">0</span> / <span id="temp-total">4</span>
+                    </div>
+                </div>
+
+                <div id="temp-practice-list" class="space-y-6">
+                    <!-- Dinámico por JS -->
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button onclick="initTempExercises()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-xl transition shadow">🔄 Generar Nuevos Casos de Temperatura</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: TEST FINAL -->
+        <section id="tab-juego" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-slate-100 text-center">
+                <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">Evaluación</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-2">🏆 Test Final Global</h2>
+                <p class="text-slate-600 max-w-xl mx-auto mb-6">Demuestra que dominas enteros, valores absolutos, opuestos, potencias y temperaturas.</p>
+                
+                <div id="quiz-container" class="text-left max-w-xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <div class="flex justify-between text-xs text-slate-500 font-semibold mb-3">
+                        <span id="quiz-progress-text">Pregunta 1 de 5</span>
+                        <span id="quiz-score-text">Puntuación: 0</span>
+                    </div>
+                    <div id="quiz-question" class="text-lg font-bold text-slate-800 mb-4"></div>
+                    <div id="quiz-options" class="space-y-3"></div>
+                    <div id="quiz-feedback-box" class="mt-4 hidden p-3 rounded-xl text-sm font-medium"></div>
+                    <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="mt-6 w-full hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-sm">Siguiente Pregunta ➔</button>
+                </div>
+
+                <div id="quiz-results" class="hidden max-w-xl mx-auto bg-indigo-50 p-8 rounded-2xl border border-indigo-100 text-center">
+                    <div class="text-4xl mb-3">🎉</div>
+                    <h3 class="text-2xl font-bold text-indigo-900 mb-2">¡Test Completado con Éxito!</h3>
+                    <p id="quiz-final-score" class="text-lg text-slate-700 mb-6"></p>
+                    <button onclick="restartQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-xl transition shadow">Volver a Intentar</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
+        <p>Plataforma Interactiva Educativa • Enteros, Potencias y Temperaturas.</p>
+    </footer>
+
+    <script>
+        // Navegación de Pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(el => {
+                el.classList.remove('bg-white', 'text-indigo-700', 'shadow-md', 'bg-amber-600', 'text-white');
+                el.classList.add('bg-indigo-700/60', 'text-white');
+            });
+
+            document.getElementById('tab-' + tabId).classList.add('active');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('bg-indigo-700/60');
+            if(tabId === 'practica-temp' || tabId === 'teoria-temp') {
+                activeBtn.classList.add('bg-amber-600', 'text-white', 'shadow-md');
+            } else {
+                activeBtn.classList.add('bg-white', 'text-indigo-700', 'shadow-md');
+            }
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // --- PRÁCTICA GENERAL ENTEROS ---
+        let practiceItems = [];
+
+        function initPracticeExercises() {
+            const n1 = getRandomInt(-15, 15);
+            const n2 = getRandomInt(-10, 10);
+            const n3 = getRandomInt(-8, 8);
+            const basePot = getRandomInt(-4, 4);
+            const expPot = getRandomInt(0, 3);
+
+            practiceItems = [
+                {
+                    id: 1,
+                    title: "Valor Absoluto",
+                    desc: `Calcula el valor absoluto de: |${n1}|`,
+                    answer: Math.abs(n1),
+                    explanation: `El valor absoluto representa la distancia al cero y siempre es positivo. Como el número es ${n1}, su distancia al cero es ${Math.abs(n1)}.`
+                },
+                {
+                    id: 2,
+                    title: "Número Opuesto",
+                    desc: `Calcula el opuesto de: op(${n2})`,
+                    answer: -n2,
+                    explanation: `El opuesto consiste en cambiar el signo al número. Si el número original es ${n2}, su opuesto es ${-n2}.`
+                },
+                {
+                    id: 3,
+                    title: "Suma y Resta de Enteros",
+                    desc: `Resuelve: (${n3}) + (${n1 < 0 ? n1 : '+' + n1})`,
+                    answer: n3 + n1,
+                    explanation: `Al operar (${n3}) + (${n1}), aplicamos las reglas de signos y el resultado correcto es ${n3 + n1}.`
+                },
+                {
+                    id: 4,
+                    title: "Multiplicación con Enteros",
+                    desc: `Resuelve: (${Math.floor(n2/2)}) × (${Math.floor(n3/2) || 2})`,
+                    answer: Math.floor(n2/2) * (Math.floor(n3/2) || 2),
+                    explanation: `En la multiplicación, se multiplican los valores absolutos y se aplican las reglas de signos. El resultado es ${Math.floor(n2/2) * (Math.floor(n3/2) || 2)}.`
+                },
+                {
+                    id: 5,
+                    title: "Potencias Básicas",
+                    desc: `Calcula la potencia: ${basePot}<sup>${expPot}</sup>`,
+                    answer: Math.pow(basePot, expPot),
+                    explanation: `La base ${basePot} multiplicada ${expPot} veces da como resultado ${Math.pow(basePot, expPot)}.`
+                },
+                {
+                    id: 6,
+                    title: "Valor Absoluto del Opuesto",
+                    desc: `Calcula: |op(${Math.abs(n2)})|`,
+                    answer: Math.abs(-Math.abs(n2)),
+                    explanation: `Primero calculamos el opuesto de ${Math.abs(n2)} (que es ${-Math.abs(n2)}), y luego su valor absoluto, lo cual da siempre positivo: ${Math.abs(-Math.abs(n2))}.`
+                }
+            ];
+
+            renderPracticeExercises();
+            updatePracticeScoreDisplay();
+        }
+
+        function renderPracticeExercises() {
+            const container = document.getElementById('practice-list');
+            container.innerHTML = '';
+
+            practiceItems.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col gap-3" id="practice-card-${index}">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-100 text-indigo-700">Ejercicio ${index + 1}: ${item.title}</span>
+                                <div class="text-lg font-bold text-slate-800">${item.desc}</div>
+                            </div>
+                            <div class="flex items-center gap-3 w-full md:w-auto">
+                                <input type="number" id="practice-input-${index}" placeholder="Tu respuesta" class="px-4 py-2 rounded-xl bg-white border border-slate-300 w-full md:w-36 text-center font-mono font-semibold">
+                                <button onclick="checkPracticeItem(${index})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-xl transition whitespace-nowrap">Comprobar</button>
+                            </div>
+                        </div>
+                        <div id="practice-feedback-${index}" class="hidden mt-2 p-3 rounded-xl text-sm"></div>
+                    </div>
+                `;
+            });
+            document.getElementById('practice-total').innerText = practiceItems.length;
+        }
+
+        function checkPracticeItem(index) {
+            const inputVal = parseInt(document.getElementById(`practice-input-${index}`).value);
+            const card = document.getElementById(`practice-card-${index}`);
+            const feedbackDiv = document.getElementById(`practice-feedback-${index}`);
+            const correctAns = practiceItems[index].answer;
+            const explanation = practiceItems[index].explanation;
+
+            if (isNaN(inputVal)) {
+                alert("Por favor, introduce un número válido.");
+                return;
+            }
+
+            feedbackDiv.classList.remove('hidden');
+
+            if (inputVal === correctAns) {
+                card.className = "p-5 rounded-xl border border-emerald-300 bg-emerald-50 flex flex-col gap-3 transition-all";
+                feedbackDiv.className = "mt-2 p-3 rounded-xl text-sm bg-emerald-100 text-emerald-900 border border-emerald-200 font-medium";
+                feedbackDiv.innerHTML = `<strong>¡Correcto! Buen trabajo.</strong> ${explanation}`;
+                practiceItems[index].solved = true;
+            } else {
+                card.className = "p-5 rounded-xl border border-rose-300 bg-rose-50 flex flex-col gap-3 transition-all";
+                feedbackDiv.className = "mt-2 p-3 rounded-xl text-sm bg-rose-100 text-rose-900 border border-rose-200 font-medium";
+                feedbackDiv.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta es <strong>${correctAns}</strong>.<br><span class="text-xs text-rose-800 mt-1 block">💡 Explicación: ${explanation}</span>`;
+                practiceItems[index].solved = false;
+            }
+            updatePracticeScoreDisplay();
+        }
+
+        function updatePracticeScoreDisplay() {
+            const solvedCount = practiceItems.filter(item => item.solved === true).length;
+            document.getElementById('practice-score').innerText = solvedCount;
+        }
+
+        // --- PRÁCTICA APARTE DE TEMPERATURAS ---
+        let tempItems = [];
+
+        function initTempExercises() {
+            const tInit1 = getRandomInt(-10, -1);
+            const sube1 = getRandomInt(4, 15);
+            const ans1 = tInit1 + sube1;
+
+            const tInit2 = getRandomInt(-5, 5);
+            const baja2 = getRandomInt(3, 10);
+            const ans2 = tInit2 - baja2;
+
+            const tManana = getRandomInt(-8, -1);
+            const tTarde = getRandomInt(2, 12);
+            const ansVar = tTarde - tManana;
+
+            const tPiso1 = getRandomInt(10, 20);
+            const tPiso2 = tPiso1 - getRandomInt(12, 25);
+
+            tempItems = [
+                {
+                    id: 1,
+                    title: "Subida de Temperatura",
+                    desc: `Por la noche el termómetro marca <strong>${tInit1}ºC</strong> y al mediodía <strong>sube ${sube1}ºC</strong>. ¿Qué temperatura marca ahora?`,
+                    answer: ans1,
+                    explanation: `Partimos de ${tInit1} y sumamos ${sube1}: (${tInit1}) + (${sube1}) = ${ans1}ºC.`
+                },
+                {
+                    id: 2,
+                    title: "Bajada de Temperatura (Helada)",
+                    desc: `A las 18:00 había <strong>${tInit2}ºC</strong> y por la madrugada la temperatura <strong>baja ${baja2}ºC</strong>. ¿Cuál es la temperatura final?`,
+                    answer: ans2,
+                    explanation: `Partimos de ${tInit2} y restamos ${baja2}: (${tInit2}) - (${baja2}) = ${ans2}ºC.`
+                },
+                {
+                    id: 3,
+                    title: "Cálculo de Variación Térmica",
+                    desc: `A primera hora de la mañana había <strong>${tManana}ºC</strong> y por la tarde el termómetro subió hasta <strong>+${tTarde}ºC</strong>. ¿Cuántos grados varió (subió) en total?`,
+                    answer: ansVar,
+                    explanation: `Calculamos la distancia restando la final menos la inicial: (+${tTarde}) - (${tManana}) = ${tTarde} + ${Math.abs(tManana)} = ${ansVar}ºC.`
+                },
+                {
+                    id: 4,
+                    title: "Cambio Extremo de Temperatura",
+                    desc: `Un congelador industrial está a <strong>+${tPiso1}ºC</strong> y al conectarlo su temperatura <strong>baja ${Math.abs(tPiso1 - tPiso2)}ºC</strong>. ¿Qué temperatura marca?`,
+                    answer: tPiso2,
+                    explanation: `A ${tPiso1} le restamos la bajada de ${Math.abs(tPiso1 - tPiso2)}, lo que nos da ${tPiso2}ºC.`
+                }
+            ];
+
+            renderTempExercises();
+            updateTempScoreDisplay();
+        }
+
+        function renderTempExercises() {
+            const container = document.getElementById('temp-practice-list');
+            container.innerHTML = '';
+
+            tempItems.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="p-5 rounded-xl border border-amber-200 bg-amber-50/50 flex flex-col gap-3" id="temp-card-${index}">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Caso Temperatura ${index + 1}: ${item.title}</span>
+                                <div class="text-lg font-bold text-slate-800">${item.desc}</div>
+                            </div>
+                            <div class="flex items-center gap-3 w-full md:w-auto">
+                                <input type="number" id="temp-input-${index}" placeholder="Ej: -4 o 12" class="px-4 py-2 rounded-xl bg-white border border-amber-300 w-full md:w-36 text-center font-mono font-semibold">
+                                <button onclick="checkTempItem(${index})" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-4 py-2 rounded-xl transition whitespace-nowrap">Comprobar</button>
+                            </div>
+                        </div>
+                        <div id="temp-feedback-${index}" class="hidden mt-2 p-3 rounded-xl text-sm"></div>
+                    </div>
+                `;
+            });
+            document.getElementById('temp-total').innerText = tempItems.length;
+        }
+
+        function checkTempItem(index) {
+            const inputVal = parseInt(document.getElementById(`temp-input-${index}`).value);
+            const card = document.getElementById(`temp-card-${index}`);
+            const feedbackDiv = document.getElementById(`temp-feedback-${index}`);
+            const correctAns = tempItems[index].answer;
+            const explanation = tempItems[index].explanation;
+
+            if (isNaN(inputVal)) {
+                alert("Por favor, introduce un número entero válido.");
+                return;
+            }
+
+            feedbackDiv.classList.remove('hidden');
+
+            if (inputVal === correctAns) {
+                card.className = "p-5 rounded-xl border border-emerald-300 bg-emerald-50 flex flex-col gap-3 transition-all";
+                feedbackDiv.className = "mt-2 p-3 rounded-xl text-sm bg-emerald-100 text-emerald-900 border border-emerald-200 font-medium";
+                feedbackDiv.innerHTML = `<strong>¡Correcto! Analizaste bien el termómetro.</strong> ${explanation}`;
+                tempItems[index].solved = true;
+            } else {
+                card.className = "p-5 rounded-xl border border-rose-300 bg-rose-50 flex flex-col gap-3 transition-all";
+                feedbackDiv.className = "mt-2 p-3 rounded-xl text-sm bg-rose-100 text-rose-900 border border-rose-200 font-medium";
+                feedbackDiv.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta es <strong>${correctAns}ºC</strong>.<br><span class="text-xs text-rose-800 mt-1 block">💡 Explicación paso a paso: ${explanation}</span>`;
+                tempItems[index].solved = false;
+            }
+            updateTempScoreDisplay();
+        }
+
+        function updateTempScoreDisplay() {
+            const solvedCount = tempItems.filter(item => item.solved === true).length;
+            document.getElementById('temp-score').innerText = solvedCount;
+        }
+
+        // --- TEST FINAL GLOBAL ---
+        const quizData = [
+            {
+                question: "¿Cuál es el valor absoluto de |-15|, es decir, | -15 |?",
+                options: ["-15", "15", "0", "1"],
+                correct: 1,
+                explanation: "El valor absoluto mide la distancia al cero y siempre es positivo. Por tanto, |-15| = 15."
+            },
+            {
+                question: "¿Cuál es el opuesto de op(-8)?",
+                options: ["-8", "8", "0", "16"],
+                correct: 0,
+                explanation: "Aplicar el opuesto es cambiar el signo. Si tenemos op(-8), el resultado es +8."
+            },
+            {
+                question: "En un control térmico: Estás a -5ºC y la temperatura sube 8ºC. ¿Qué marca el termómetro?",
+                options: ["-13ºC", "+3ºC", "+13ºC", "-3ºC"],
+                correct: 1,
+                explanation: "(-5) + (+8) = +3ºC. Al sumar 5 grados llegamos al 0, y nos quedan 3 grados positivos."
+            },
+            {
+                question: "¿Cuánto es (-3)³ (menos tres elevado al cubo)?",
+                options: ["-27", "27", "-9", "9"],
+                correct: 0,
+                explanation: "Multiplicamos tres veces: (-3) × (-3) × (-3) = +9 × (-3) = -27."
+            },
+            {
+                question: "A las 4:00 a.m. había -4ºC y a las 12:00 había +6ºC. ¿Cuántos grados subió en total?",
+                options: ["2ºC", "-2ºC", "10ºC", "6ºC"],
+                correct: 2,
+                explanation: "Calculamos la diferencia: (+6) - (-4) = 6 + 4 = 10ºC de variación."
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let userScore = 0;
+
+        function loadQuizQuestion() {
+            const q = quizData[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `Pregunta ${currentQuizIndex + 1} de ${quizData.length}`;
+            document.getElementById('quiz-score-text').innerText = `Puntuación: ${userScore}`;
+            document.getElementById('quiz-question').innerText = q.question;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                optionsContainer.innerHTML += `
+                    <button onclick="selectQuizOption(${idx})" class="w-full text-left p-3 rounded-xl border border-slate-200 bg-white hover:bg-indigo-50 hover:border-indigo-300 transition font-medium text-slate-700 quiz-opt-btn" data-index="${idx}">
+                        ${String.fromCharCode(65 + idx)}. ${opt}
+                    </button>
+                `;
+            });
+            document.getElementById('quiz-feedback-box').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function selectQuizOption(selectedIndex) {
+            const q = quizData[currentQuizIndex];
+            const optButtons = document.querySelectorAll('.quiz-opt-btn');
+            optButtons.forEach(btn => btn.disabled = true);
+
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            feedbackBox.classList.remove('hidden');
+
+            if (selectedIndex === q.correct) {
+                optButtons[selectedIndex].classList.remove('bg-white', 'border-slate-200', 'hover:bg-indigo-50');
+                optButtons[selectedIndex].classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                feedbackBox.className = "mt-4 p-3 rounded-xl text-sm font-medium bg-emerald-50 text-emerald-900 border border-emerald-200";
+                feedbackBox.innerHTML = `<strong>¡Correcto!</strong> ${q.explanation}`;
+                userScore += 20;
+            } else {
+                optButtons[selectedIndex].classList.remove('bg-white', 'border-slate-200', 'hover:bg-indigo-50');
+                optButtons[selectedIndex].classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+                optButtons[q.correct].classList.remove('bg-white', 'border-slate-200', 'hover:bg-indigo-50');
+                optButtons[q.correct].classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                feedbackBox.className = "mt-4 p-3 rounded-xl text-sm font-medium bg-rose-50 text-rose-900 border border-rose-200";
+                feedbackBox.innerHTML = `<strong>Incorrecto.</strong> La respuesta correcta era la <strong>${String.fromCharCode(65 + q.correct)}</strong>. ${q.explanation}`;
+            }
+
+            document.getElementById('quiz-score-text').innerText = `Puntuación: ${userScore}`;
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizData.length) {
+                loadQuizQuestion();
+            } else {
+                document.getElementById('quiz-container').classList.add('hidden');
+                const resultsBox = document.getElementById('quiz-results');
+                resultsBox.classList.remove('hidden');
+                document.getElementById('quiz-final-score').innerHTML = `Has conseguido <strong>${userScore} de 100 puntos</strong>.<br>${userScore >= 80 ? '🌟 ¡Excelente dominio de los enteros y las temperaturas!' : '👍 ¡Buen intento! Repasa las pestañas de teoría y práctica.'}`;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            userScore = 0;
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        // Inicialización al cargar la página
+        initPracticeExercises();
+        initTempExercises();
+        loadQuizQuestion();
+    </script>
+</body>
+</html>
